@@ -1,43 +1,52 @@
-# qrv-admin
+# QR-V™ Admin — Consolidated Module Source
 
-Internal administrative console for the QR-V™ Global Verification Network.
+The administrative control plane is no longer planned as a separate public node.
 
-## Production Boundary
+## Canonical route
 
-`admin.qrv.network` must remain private and authenticated. It must not be merged into the public `qrv.network` root site.
+```text
+https://qrv.network/admin
+```
 
-## Admin Scope
+`/admin` must remain private, authenticated, role-restricted, and excluded from ordinary public navigation and search indexing. Consolidation into the platform node does **not** make the admin surface public.
 
-The admin console may cover:
+## Runtime boundary
 
-- issuer approvals;
-- issuer status changes;
+```text
+qrv.network/admin
+  ↓ server-side authorized requests
+api.qrv.network/api/v1/admin/*
+  ↓
+PostgreSQL / audit data
+```
+
+The browser must never receive database credentials, platform write secrets, or unrestricted administrative API keys.
+
+## Admin scope
+
+- issuer approvals and suspension;
 - record audits;
 - revocation review;
-- API key management;
-- metrics and network activity;
+- issuer/API key lifecycle;
+- network metrics;
 - suspicious record investigation;
 - support escalations;
-- billing/account status cross-checks;
+- billing/account cross-checks;
 - operational controls.
 
-## Required Before Public Deployment
+## Required before activation
 
-1. Authentication.
-2. Role-based authorization.
-3. Admin audit logs.
-4. API key management.
-5. Issuer approval workflow.
-6. Revocation review workflow.
-7. No public write routes without authorization.
-8. Rate limiting and security headers.
-9. `.env.example` with required secrets placeholders.
-10. Deployment documentation.
+1. Individual administrator authentication.
+2. MFA for privileged accounts.
+3. Role-based authorization.
+4. Admin audit logs.
+5. CSRF protection for browser mutations.
+6. Session rotation and revocation.
+7. Rate limiting and security headers.
+8. Explicit admin API authorization on `api.qrv.network`.
+9. No administrative secrets in browser-readable configuration.
+10. `robots.txt` / indexing exclusion.
 
-## Public-Safe Rule
+## Repository status
 
-The public root site may link to `qrv.network/support`, `qrv.network/status`, and `issuer.qrv.network`. It should not link ordinary visitors into admin surfaces.
-
-## Current Status
-
-Planning repository. Not production deployable until the required controls above exist.
+This repository is retained as the source module and requirements record for the future `qrv.network/admin` implementation. It is not a separate production deployment in the two-node architecture.
