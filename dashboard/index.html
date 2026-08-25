@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>QR-V™ Admin Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="QR-V admin navigation">
+      <div class="brand"><span class="brand-mark">QR-V™</span><small>Admin Control Plane</small></div>
+      <nav id="nav"></nav>
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span>Private operator surface</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">QRV.Network • Commercial Operations</p>
+          <h1>Admin Dashboard</h1>
+          <p class="subhead">Issuer growth, verification activity, revenue, signing readiness, and production health.</p>
+        </div>
+        <div class="top-actions">
+          <button class="button secondary" data-action="refresh">Refresh</button>
+          <button class="button primary" data-action="issuer">Approve Issuer</button>
+        </div>
+      </header>
+
+      <section class="alert warning" id="production-gate">
+        <strong>Production Gate:</strong>
+        <span>Ed25519 signing must remain PENDING until issuer key generation, signature persistence, and verification are operational end-to-end.</span>
+      </section>
+
+      <section class="kpi-grid" id="kpi-grid" aria-label="Commercial scorecard"></section>
+
+      <section class="two-col">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">30-Day Revenue Sprint</p><h2>Commercial Pipeline</h2></div><span class="badge live">ACTIVE</span></div>
+          <div id="pipeline" class="pipeline"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Protocol + Platform</p><h2>Production Readiness</h2></div></div>
+          <div id="readiness" class="readiness"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><p class="eyebrow">Issuer Operations</p><h2>Issuer Lifecycle</h2></div><button class="text-button">View all issuers</button></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issuer</th><th>Commercial State</th><th>Records</th><th>Verifications</th><th>Signing</th><th>Billing</th><th>Risk</th></tr></thead>
+            <tbody id="issuer-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="two-col">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Verification Network</p><h2>Verification Mix</h2></div></div>
+          <div id="verification-mix" class="verification-mix"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Action Queue</p><h2>Highest-Value Next Actions</h2></div></div>
+          <ol id="action-queue" class="action-list"></ol>
+        </article>
+      </section>
+
+      <footer>
+        <span>Canonical public platform: qrv.network</span>
+        <span>Admin data must resolve from authorized server-side sources.</span>
+      </footer>
+    </main>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
